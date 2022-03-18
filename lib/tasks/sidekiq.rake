@@ -8,6 +8,16 @@ namespace :sidekiq do
     end
   end
 
+  desc "Sidekiq start"
+  task :start do
+    puts "Starting Sidekiq..."
+    # system "bundle exec sidekiq -e production -q 	rncs_worker_api_entreprise_production_auto_updates"
+    system "bundle exec sidekiq -e production -C config/sidekiq.yml"
+
+    # sleep(2)
+    # puts "Sidekiq started #PID-#{File.readlines(sidekiq_pid_file).first}."
+  end
+
   desc 'clear Sidekiq queues, all or only one (ie: rake sidekiq:clear_queue[:titmc_stock])'
   task :clear_queue, [:queue_name] => :environment do |_, args|
     case args[:queue_name]

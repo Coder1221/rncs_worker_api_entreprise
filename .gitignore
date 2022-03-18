@@ -28,9 +28,9 @@
 /config/master.key
 
 # TODO create an init_project task to create this file template in dev env
-/config/sidekiq.yml
 
 # Ignore files from simplecov
 /coverage/*
-
+Dockerfile
+dcoker-compose.yml
 /opendata-rncs.inpi.fr/*

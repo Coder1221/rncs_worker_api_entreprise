@@ -1,0 +1,11 @@
+:queues:
+  - rncs_worker_api_entreprise_production_auto_updates
+  - rncs_worker_api_entreprise_production_tc_daily_updates
+  - rncs_worker_api_entreprise_production_tc_stock
+  - rncs_worker_api_entreprise_production_titmc_daily_update
+  - rncs_worker_api_entreprise_production_titmc_stock
+  - rncs_worker_api_entreprise_development_auto_updates
+  - rncs_worker_api_entreprise_development_tc_daily_updates
+  - rncs_worker_api_entreprise_development_tc_stock
+  - rncs_worker_api_entreprise_development_titmc_daily_update
+  - rncs_worker_api_entreprise_development_titmc_stock

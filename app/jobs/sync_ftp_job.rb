@@ -4,6 +4,7 @@ class SyncFTPJob < ActiveJob::Base
   queue_as :auto_updates
 
   def perform(*_)
+    p 'we are in the job'
     sync_files
     ensure_permissions_are_correct
     clean_sync_folders
@@ -13,6 +14,7 @@ class SyncFTPJob < ActiveJob::Base
 
   def ensure_permissions_are_correct
     _stdout, stderr, status = Open3.capture3 "find #{rncs_sources_path} -type d -exec chmod 755 {} +"
+    p _stdout ,stderr ,status ,'==<'
     Rails.logger.error "Ensure permissions for directories failed with #{stderr}" unless status.success?
 
     _stdout, stderr, status = Open3.capture3 "find #{rncs_sources_path} -type f -exec chmod 644 {} +"
@@ -20,7 +22,9 @@ class SyncFTPJob < ActiveJob::Base
   end
 
   def sync_files
+    p 'In sync files', ftp_login ,ftp_password
     _stdout, stderr, status = Open3.capture3 wget_command
+    p _stdout ,stderr ,status ,'SYNC FILES'
     Rails.logger.error "WGET sync failed with: #{stderr}" unless status.success?
   end
 
@@ -42,11 +46,11 @@ class SyncFTPJob < ActiveJob::Base
   end
 
   def ftp_login
-    @ftp_login ||= Rails.application.credentials.ftp_login
+    @ftp_login = ENV['FTPLOGIN']
   end
 
   def ftp_password
-    @ftp_password ||= Rails.application.credentials.ftp_password
+    @ftp_password = ENV['FTPPASSWORD']
   end
 
   def current_year
